@@ -6,7 +6,7 @@ import (
 )
 
 var (
-	ErrEmptyEmitter = errors.New("attempo to use empty emitter")
+	ErrEmptyEmitter = errors.New("attempt to use an empty emitter")
 )
 
 type (
