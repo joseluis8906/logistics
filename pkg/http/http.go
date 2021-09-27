@@ -2,7 +2,6 @@ package http
 
 import (
 	"encoding/json"
-	"net/http"
 	stdhttp "net/http"
 	"time"
 
@@ -19,12 +18,12 @@ type (
 	}
 )
 
-func Error(w stdhttp.ResponseWriter, r *http.Request, status int, resp error) {
+func Error(w stdhttp.ResponseWriter, r *stdhttp.Request, status int, resp error) {
 	w.WriteHeader(status)
 	err := json.NewEncoder(w).Encode(ErrorResponse{
 		Timestamp: time.Now(),
 		Status:    status,
-		Error:     http.StatusText(status),
+		Error:     stdhttp.StatusText(status),
 		Message:   resp.Error(),
 		Path:      r.URL.Path,
 	})
@@ -33,7 +32,7 @@ func Error(w stdhttp.ResponseWriter, r *http.Request, status int, resp error) {
 	}
 }
 
-func Success(w stdhttp.ResponseWriter, r *http.Request, status int, body interface{}) {
+func Success(w stdhttp.ResponseWriter, r *stdhttp.Request, status int, body interface{}) {
 	w.WriteHeader(status)
 	err := json.NewEncoder(w).Encode(body)
 	if err != nil {
@@ -41,7 +40,7 @@ func Success(w stdhttp.ResponseWriter, r *http.Request, status int, body interfa
 	}
 }
 
-func Health(w http.ResponseWriter, r *http.Request) {
+func Health(w stdhttp.ResponseWriter, r *stdhttp.Request) {
 	log.Debug("debug")
 	log.Info("info")
 	log.Warn("warning")
