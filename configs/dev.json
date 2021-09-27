@@ -1,0 +1,33 @@
+{
+  "log": {
+    "level": "debug"
+  },
+  "kafka": {
+    "host": "127.0.0.1",
+    "port": 9092,
+    "groups": {
+      "default": {
+        "id": "logistics",
+        "topics": ["broadcast"]
+      }
+    }
+  },
+  "etcd": {
+    "host": "127.0.0.1",
+    "port": 2379
+  },
+  "mongodb": {
+    "logistics": {
+      "host": "127.0.0.1",
+      "port": 27017,
+      "user": "logistics",
+      "psswd": "logistics1234",
+      "db": "logistics"
+    }
+  },
+  "http": {
+    "server": {
+      "port": 3000
+    }
+  }
+}
