@@ -6,3 +6,7 @@ type (
 		Lng float64
 	}
 )
+
+func NullLocation() Location {
+	return Location{}
+}

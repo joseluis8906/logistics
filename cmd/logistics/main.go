@@ -214,7 +214,10 @@ func main() {
 	r.Use(middleware.Logger)
 	r.Get("/heath", myhttp.Health)
 	r.Route("/sales", func(r chi.Router) {
-		r.Get("/quote-shipping", func(w http.ResponseWriter, r *http.Request) { myhttp.QuoteShipping(ctx, w, r) })
+		r.Get("/quote-shipping", func(w http.ResponseWriter, r *http.Request) { quoteShipping(ctx, w, r) })
+	})
+	r.Route("/transport", func(r chi.Router) {
+		r.Get("/city-location", func(w http.ResponseWriter, r *http.Request) { cityLocation(ctx, w, r) })
 	})
 
 	//###################

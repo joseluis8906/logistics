@@ -47,4 +47,5 @@ Thumbs.db
 *.flv
 *.mov
 *.wmv
-
+web/logistics/node_modules
+web/logistics/.next

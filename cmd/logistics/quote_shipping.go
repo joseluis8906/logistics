@@ -1,4 +1,4 @@
-package http
+package main
 
 import (
 	"context"
@@ -7,6 +7,7 @@ import (
 
 	"bitbucket.org/josecaceresatencora/logistics/internal/sales"
 	"bitbucket.org/josecaceresatencora/logistics/pkg/geo"
+	myhttp "bitbucket.org/josecaceresatencora/logistics/pkg/http"
 	"bitbucket.org/josecaceresatencora/logistics/pkg/logistics"
 	"bitbucket.org/josecaceresatencora/logistics/pkg/math"
 	log "github.com/sirupsen/logrus"
@@ -21,7 +22,7 @@ type (
 	}
 )
 
-func QuoteShipping(ctx context.Context, w http.ResponseWriter, r *http.Request) {
+func quoteShipping(ctx context.Context, w http.ResponseWriter, r *http.Request) {
 	fromLat, err := strconv.ParseFloat(r.URL.Query().Get("from_lat"), 64)
 	if err != nil {
 		log.Error(err)
@@ -81,10 +82,10 @@ func QuoteShipping(ctx context.Context, w http.ResponseWriter, r *http.Request) 
 
 	brief, err := logistics.App().Queries.QuoteShipping(ctx, shipping)
 	if err != nil {
-		Error(w, r, http.StatusInternalServerError, err)
+		myhttp.Error(w, r, http.StatusInternalServerError, err)
 	}
 
-	Success(w, r, http.StatusOK, QuoteShippingResponse{
+	myhttp.Success(w, r, http.StatusOK, QuoteShippingResponse{
 		Distance: math.Fixed(float64(brief.Distance), 2),
 		Weight:   math.Fixed(float64(brief.Weight), 2),
 		Size:     math.Fixed(float64(brief.Size), 2),
