@@ -1,6 +1,6 @@
 .PHONY: build
 build:
-	@go build -o build/logistics cmd/logistics/main.go
+	@go build -o build/logistics cmd/logistics/*.go
 
 .PHONY: clean
 clean:
@@ -14,8 +14,8 @@ infra-up:
 infra-down:
 	@cd scripts/ && docker-compose -p logistics down --remove-orphans
 
-.PHONY: all
-all: infra-up build
+.PHONY: configure
+configure: infra-up
 	@crypt set -endpoint="http://127.0.0.1:2379" -plaintext /config/logistics.json ./configs/runtime.json
 
 .PHONY: reset

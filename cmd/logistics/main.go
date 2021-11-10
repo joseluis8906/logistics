@@ -46,7 +46,7 @@ func main() {
 	//### log ###
 	//###########
 	{
-		sysLog, err := syslog.New(syslog.LOG_NOTICE|syslog.LOG_USER, programName)
+		_, err := syslog.New(syslog.LOG_NOTICE|syslog.LOG_USER, programName)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -55,7 +55,7 @@ func main() {
 			Env:       env,
 			Formatter: log.StandardLogger().Formatter,
 		})
-		log.SetOutput(sysLog)
+		log.SetOutput(os.Stdout)
 		log.SetReportCaller(true)
 	}
 

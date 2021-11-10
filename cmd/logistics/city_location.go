@@ -6,5 +6,5 @@ import (
 )
 
 func cityLocation(ctx context.Context, w http.ResponseWriter, r *http.Request) {
-
+	w.WriteHeader(http.StatusNotImplemented)
 }

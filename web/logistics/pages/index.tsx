@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import Container from '@mui/material/Container'
-import Card from '@mui/material/Card'
+import { Card, CardContent } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
-import CardContent from '@mui/material/CardContent'
-import { Typography } from '@mui/material'
+import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell } from '@mui/material'
+import Paper from '@mui/material/Paper'
+import Typography from '@mui/material/Typography'
 
 export default function Home () {
   const guardMinVal = (evt: React.ChangeEvent<HTMLInputElement>, cb: (a: number) => void) => {
@@ -27,18 +28,46 @@ export default function Home () {
   const controlWeight = (evt: React.ChangeEvent<HTMLInputElement>) => guardMinVal(evt, setWeight)
 
   return (
-    <Container sx={{ mt: 10 }}>
+    <Container sx={{ mt: 6 }}>
       <Card sx={{ mx: 'auto', p: 2, width: 500, height: 'auto' }}>
         <CardContent><Typography>Calculate Shipping</Typography></CardContent>
         <CardContent>
           <Box component='form' sx={{ '& > :not(style)': { m: 1, width: '27ch' } }} noValidate autoComplete='off'>
             <TextField label="From" type="text"/>
             <TextField label="To" type="text"/>
-            <TextField label="Width" type="number" onChange={ controlWidth } value={ width }/>
-            <TextField label="Height" type="number" onChange={ controlHeight } value={ height }/>
-            <TextField label="Length" type="number" onChange={ controlLength } value={ length }/>
-            <TextField label="Weight" type="number" onChange={ controlWeight } value={ weight }/>
+            <TextField label="Width" type="text" onChange={ controlWidth } value={ width }/>
+            <TextField label="Height" type="text" onChange={ controlHeight } value={ height }/>
+            <TextField label="Length" type="text" onChange={ controlLength } value={ length }/>
+            <TextField label="Weight" type="text" onChange={ controlWeight } value={ weight }/>
           </Box>
+          <TableContainer component={ Paper }>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Description</TableCell>
+                  <TableCell align='right'>Amount</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow>
+                  <TableCell>Distance</TableCell>
+                  <TableCell align='right'>$0</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Size</TableCell>
+                  <TableCell align='right'>$0</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Weight</TableCell>
+                  <TableCell align='right'>$0</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Total</TableCell>
+                  <TableCell align='right'>$0</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
         </CardContent>
       </Card>
     </Container>
